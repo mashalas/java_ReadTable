@@ -63,8 +63,31 @@ public class ReadTable {
         return this.data.size();
     }
     
-    public ArrayList<String> getHeader() {
-        return this.header;
+    public String[] getHeader() {
+        //return this.header.toArray(new String[0]);
+        return this.header.toArray(String[]::new);
+    }
+    
+    public String[] getRow(int rowNumber) {
+        ArrayList<String> result = new ArrayList<>();
+        for (int j=0; j<this.header.size(); j++) {
+            result.add( this.data.get(rowNumber).get(this.header.get(j)) );
+        }
+        //return result.toArray(new String[0]);
+        return result.toArray(String[]::new);
+    }
+    
+    public String[] getColumn(String columnName) {
+        ArrayList<String> result = new ArrayList<>();
+        for (int i=0; i<this.data.size(); i++) {
+            result.add(this.data.get(i).get(columnName));
+        }
+        //return result.toArray(new String[0]);
+        return result.toArray(String[]::new);
+    }
+    
+    public String[] getColumn(int columnIndex) {
+        return getColumn(this.header.get(columnIndex));
     }
     
     //Удалить однострочный комментарий
